@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"go-jti/config"
+	"go-jti/controllers/pages_controller"
 	"go-jti/controllers/phone_number_controller"
 	"go-jti/controllers/user_controller"
 	"go-jti/repositories/phone_number_repository"
@@ -19,6 +20,9 @@ var PhoneNumberController phone_number_controller.PhoneNumberController
 
 //User
 var UserController user_controller.UserController
+
+//Pages
+var PagesController pages_controller.PagesController
 
 func Setup() {
 	err := godotenv.Load()
@@ -51,4 +55,5 @@ func initServices() {
 func initControllers() {
 	PhoneNumberController = phone_number_controller.NewPhoneNumberController(phoneNumberService)
 	UserController = user_controller.NewUserController()
+	PagesController = pages_controller.NewPagesController()
 }

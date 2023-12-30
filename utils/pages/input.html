@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input | JTI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+</head>
+
+
+
+<body>
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="images/undraw_app_data_re_vg5c.png" class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <form id="form">
+            <h3 class="mt-1 mb-5 pb-1 text-center">Data No Handphone</h3>
+            <!-- No Handphone input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <input type="number" id="Handphone" class="form-control" required />
+              <label class="form-label" for="Handphone">No Handphone</label>
+            </div>
+
+            <!-- Provider input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <select id="Provider" class="form-select select2">
+                <option disabled>Provider</option>
+                <option value="Telkomsel">Telkomsel</option>
+                <option value="XL">XL</option>
+                <option value="Indosat">Indosat</option>
+                <option value="3">3</option>
+                <option value="Axis">Axis</option>
+                <option value="Smartfren">Smartfren</option>
+              </select>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+                <!-- Checkbox -->
+                <div class="form-check d-flex gap-2">
+                  <button type="submit" style="background-color: #dd4b39;" class="btn btn-primary">Save</button>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-modal-init
+                    data-mdb-target="#exampleModal" id="generate-number">
+                    Auto
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title text-center" id="exampleModalLabel">Random Phone Number</h5>
+                          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                            aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>No Handphone</th>
+                                <th>Provider</th>
+                              </tr>
+                            </thead>
+                            <tbody id="generate-number-table">
+
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init
+                            data-mdb-dismiss="modal">
+                            Close
+                          </button>
+                          <button type="button" class="btn btn-primary" data-mdb-ripple-init id="choose" style="background-color: #dd4b39;">Choose</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script>$('.select2').select2();</script>
+  <script src="js/input.js"></script>
+</body>
+
+</html>

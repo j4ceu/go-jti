@@ -9,4 +9,5 @@ type PhoneNumberController interface {
 	FindPhoneNumberByID(ctx *fiber.Ctx) error
 	FindOddPhoneNumber(ctx *fiber.Ctx) error
 	FindEvenPhoneNumber(ctx *fiber.Ctx) error
+	GeneratePhoneNumber(ctx *fiber.Ctx) error
 }

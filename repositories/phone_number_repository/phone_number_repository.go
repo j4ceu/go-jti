@@ -7,6 +7,7 @@ type PhoneNumberRepository interface {
 	UpdatePhoneNumber(phoneNumber models.PhoneNumber, id string) (models.PhoneNumber, error)
 	DeletePhoneNumber(id string) (models.PhoneNumber, error)
 	FindPhoneNumberByID(id string) (models.PhoneNumber, error)
+	CheckPhoneNumberExists(number string) (bool, error)
 	FindOddPhoneNumber() ([]models.PhoneNumber, error)
 	FindEvenPhoneNumber() ([]models.PhoneNumber, error)
 }

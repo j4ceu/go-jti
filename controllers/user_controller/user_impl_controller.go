@@ -53,9 +53,12 @@ func (c *userController) GoogleCallback(ctx *fiber.Ctx) error {
 		return response.Error(ctx, "failed", http.StatusBadRequest, err)
 	}
 
-	ctx.Locals("token", token)
+	ctx.Cookie(&fiber.Cookie{
+		Name:  "token",
+		Value: token,
+	})
 
-	return response.Success(ctx, "success", http.StatusOK, token)
+	return ctx.Redirect("/choose")
 
 	// googlecon := config.GoogleConfig()
 

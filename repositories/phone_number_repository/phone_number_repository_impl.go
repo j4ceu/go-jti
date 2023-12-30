@@ -57,3 +57,10 @@ func (r *phoneNumberRepository) FindEvenPhoneNumber() ([]models.PhoneNumber, err
 
 	return phoneNumber, err
 }
+
+func (r *phoneNumberRepository) CheckPhoneNumberExists(number string) (bool, error) {
+	var exists bool
+	err := r.db.Model(&models.PhoneNumber{}).Select("count(*) > 0").Where("phone_number = ?", number).Find(&exists).Error
+
+	return exists, err
+}

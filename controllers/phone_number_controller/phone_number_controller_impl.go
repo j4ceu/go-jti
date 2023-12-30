@@ -40,7 +40,7 @@ func (c *phoneNumberController) CreatePhoneNumber(ctx *fiber.Ctx) error {
 }
 
 func (c *phoneNumberController) UpdatePhoneNumber(ctx *fiber.Ctx) error {
-	var payload payload.PhoneNumberPayload
+	var payload payload.UpdatePhoneNumberPayload
 
 	if err := ctx.BodyParser(&payload); err != nil {
 		return response.Error(ctx, "failed", http.StatusBadRequest, err)
@@ -97,6 +97,15 @@ func (c *phoneNumberController) FindOddPhoneNumber(ctx *fiber.Ctx) error {
 
 func (c *phoneNumberController) FindEvenPhoneNumber(ctx *fiber.Ctx) error {
 	phoneNumber, err := c.service.FindEvenPhoneNumber()
+	if err != nil {
+		return response.Error(ctx, "failed", http.StatusInternalServerError, err)
+	}
+
+	return response.Success(ctx, "success", http.StatusOK, phoneNumber)
+}
+
+func (c *phoneNumberController) GeneratePhoneNumber(ctx *fiber.Ctx) error {
+	phoneNumber, err := c.service.GenerateNumber()
 	if err != nil {
 		return response.Error(ctx, "failed", http.StatusInternalServerError, err)
 	}

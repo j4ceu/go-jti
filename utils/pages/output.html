@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="10" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Output | JTI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
+</head>
+
+
+
+<body>
+  <section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-4 col-lg-4 col-xl-4">
+          <img src="images/undraw_To_do_re_jaef.png" class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-8 col-lg-8 col-xl-8">
+          <h3 class="mt-1 mb-5 pb-1 text-center">Output</h3>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-lg-6 col-xl-6">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">Ganjil</th>
+                      <th scope="col" class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="odd-data">
+                    <tr>
+                      <td>Test</td>
+                      <td><button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init
+                          data-mdb-target="#exampleModal">
+                          Launch demo modal
+                        </button></td>
+                    </tr>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                              aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-outline mb4" data-mdb-input-init>
+                              <input type="text" id="inputNumber" class="form-control" value="0123" />
+                              <label class="form-label" for="inputNumber">No Handphone</label>
+                            </div>
+                            <div class="form-outline mb4" data-mdb-input-init>
+                              <input type="text" id="inputProvider" class="form-control disable" value="provider" />
+                              <label class="form-label" for="inputProvider">Provider</label>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-mdb-ripple-init
+                              data-mdb-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6 col-lg-6 col-xl-6">
+                <div class="mb-4">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center">Genap</th>
+                        <th scope="col" class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="even-data">
+                      <tr>
+                        <td>Test</td>
+                        <td><button type="button" class="btn btn-primary" data-mdb-ripple-init data-mdb-modal-init
+                            data-mdb-target="#exampleModal">
+                            Launch demo modal
+                          </button></td>
+                      </tr>
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                                aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-outline mb4" data-mdb-input-init>
+                                <input type="text" id="inputNumber" class="form-control" value="0123" />
+                                <label class="form-label" for="inputNumber">No Handphone</label>
+                              </div>
+                              <div class="form-outline mb4" data-mdb-input-init>
+                                <input type="text" id="inputProvider" class="form-control disable" value="provider" />
+                                <label class="form-label" for="inputProvider">Provider</label>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-mdb-ripple-init
+                                data-mdb-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-mdb-ripple-init>Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/output.js"></script>
+</body>
+
+</html>

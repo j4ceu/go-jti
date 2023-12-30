@@ -6,6 +6,7 @@ import (
 	"go-jti/dto/response"
 	"go-jti/models"
 	"go-jti/repositories/phone_number_repository"
+	"go-jti/utils"
 	"log"
 
 	"gorm.io/gorm"
@@ -20,12 +21,25 @@ func NewPhoneNumberService(repository phone_number_repository.PhoneNumberReposit
 }
 
 func (s *phoneNumberService) CreatePhoneNumber(payload payload.PhoneNumberPayload) (*response.PhoneNumberResponse, error) {
-	phoneNumber := models.PhoneNumber{
-		PhoneNumber: payload.PhoneNumber,
-		Provider:    payload.Provider,
+
+	decryptPhoneNumber, err := utils.GetAESDecrypted(payload.PhoneNumber)
+	if err != nil {
+		log.Println(string("\033[31m"), err.Error())
+		return nil, err
 	}
 
-	phoneNumber, err := s.repository.CreatePhoneNumber(phoneNumber)
+	decryptProvider, err := utils.GetAESDecrypted(payload.Provider)
+	if err != nil {
+		log.Println(string("\033[31m"), err.Error())
+		return nil, err
+	}
+
+	phoneNumber := models.PhoneNumber{
+		PhoneNumber: string(decryptPhoneNumber),
+		Provider:    string(decryptProvider),
+	}
+
+	phoneNumber, err = s.repository.CreatePhoneNumber(phoneNumber)
 	if err != nil {
 		log.Println(string("\033[31m"), err.Error())
 		return nil, err
@@ -34,7 +48,7 @@ func (s *phoneNumberService) CreatePhoneNumber(payload payload.PhoneNumberPayloa
 	return response.NewPhoneNumberResponse(phoneNumber), nil
 }
 
-func (s *phoneNumberService) UpdatePhoneNumber(payload payload.PhoneNumberPayload, id string) (*response.PhoneNumberResponse, error) {
+func (s *phoneNumberService) UpdatePhoneNumber(payload payload.UpdatePhoneNumberPayload, id string) (*response.PhoneNumberResponse, error) {
 	phoneNumber, err := s.repository.FindPhoneNumberByID(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -44,11 +58,12 @@ func (s *phoneNumberService) UpdatePhoneNumber(payload payload.PhoneNumberPayloa
 	}
 
 	if payload.PhoneNumber != "" {
-		phoneNumber.PhoneNumber = payload.PhoneNumber
-	}
-
-	if payload.Provider != "" {
-		phoneNumber.Provider = payload.Provider
+		decryptPhoneNumber, err := utils.GetAESDecrypted(payload.PhoneNumber)
+		if err != nil {
+			log.Println(string("\033[31m"), err.Error())
+			return nil, err
+		}
+		phoneNumber.PhoneNumber = string(decryptPhoneNumber)
 	}
 
 	phoneNumber, err = s.repository.UpdatePhoneNumber(phoneNumber, id)
@@ -73,8 +88,10 @@ func (s *phoneNumberService) DeletePhoneNumber(id string) (*response.PhoneNumber
 func (s *phoneNumberService) FindPhoneNumberByID(id string) (*response.PhoneNumberResponse, error) {
 	phoneNumber, err := s.repository.FindPhoneNumberByID(id)
 	if err != nil {
-		log.Println(string("\033[31m"), err.Error())
-		return nil, errors.New("204")
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, errors.New("204")
+		}
+		return nil, err
 	}
 
 	return response.NewPhoneNumberResponse(phoneNumber), nil
@@ -98,4 +115,29 @@ func (s *phoneNumberService) FindEvenPhoneNumber() (*[]response.PhoneNumberRespo
 	}
 
 	return response.NewPhoneNumberResponses(phoneNumber), nil
+}
+
+func (s *phoneNumberService) GenerateNumber() (*[]response.PhoneNumberResponse, error) {
+	var phoneNumbers []models.PhoneNumber
+
+	for i := 0; i < 25; i++ {
+		check := true
+		number, provider := utils.GenerateRandomNumber()
+		for check {
+			exists, err := s.repository.CheckPhoneNumberExists(number)
+			if err != nil {
+				return nil, err
+			}
+			if !exists {
+				phoneNumber := models.PhoneNumber{
+					PhoneNumber: number,
+					Provider:    provider,
+				}
+				phoneNumbers = append(phoneNumbers, phoneNumber)
+				check = false
+			}
+		}
+	}
+	return response.NewPhoneNumberResponses(phoneNumbers), nil
+
 }
